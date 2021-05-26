@@ -7,6 +7,7 @@ var logger = require('morgan');
 
 var weatherRouter = require('./routes/weather');
 var usersRouter = require('./routes/users');
+var cameraRouter = require('./routes/camera');
 const { default: axios } = require("axios");
 
 var app = express();
@@ -20,6 +21,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/weather', weatherRouter);
 app.use('/users', usersRouter);
+app.use('/camera', cameraRouter);
 
 
 // catch 404 and forward to error handler
