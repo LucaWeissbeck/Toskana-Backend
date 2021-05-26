@@ -5,7 +5,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var weatherRouter = require('./routes/weather');
+var authRouter = require('./routes/netatmoauthorisation');
 var usersRouter = require('./routes/users');
 var cameraRouter = require('./routes/camera');
 const { default: axios } = require("axios");
@@ -19,7 +19,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/weather', weatherRouter);
+app.use('/authorise', authRouter);
 app.use('/users', usersRouter);
 app.use('/camera', cameraRouter);
 
