@@ -9,6 +9,7 @@ var cors = require('cors')
 var authRouter = require('./routes/netatmoauthorisation');
 var weatherRouter = require('./routes/weather');
 var cameraRouter = require('./routes/camera');
+var phValueRouter = require('./routes/phValue');
 const { default: axios } = require("axios");
 
 var app = express();
@@ -25,6 +26,7 @@ app.use(cors());
 app.use('/authorise', authRouter);
 app.use('/weather', weatherRouter);
 app.use('/camera', cameraRouter);
+app.use('/ph', phValueRouter);
 
 
 // catch 404 and forward to error handler
