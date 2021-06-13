@@ -14,4 +14,6 @@ router.get('/weatherdata', async(req, res) => {
   };
   }
 )
+
+
 module.exports = router;

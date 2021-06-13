@@ -8,7 +8,6 @@ const getWeatherInfoCurrent = async(authToken) => {
         "device_id" : macInnen,
         "get_favorites" : "false"
     })
-    console.log(data);
     const response = await axios.get('https://api.netatmo.com/api/getstationsdata', {headers: {"accept" : "application/json", "Authorization" : "Bearer " + authToken}, data});
     return response.data;
 };
