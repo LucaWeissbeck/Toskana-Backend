@@ -4,7 +4,9 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var cors = require('cors')
+var cors = require('cors');
+const netatmoAuthService = require("../services/NetatmoAuthorizeService");
+let netatmoAuthKey = "";
 
 var authRouter = require('./routes/netatmoauthorisation');
 var weatherRouter = require('./routes/weather');
@@ -33,6 +35,26 @@ app.use('/authorise', authRouter);
 app.use('/weather', weatherRouter);
 app.use('/camera', cameraRouter);
 app.use('/ph', phValueRouter);
+
+
+// Handle 403 Requests to refresh Netatmo Token
+
+app.use(["/weather", "/camera"], async(err, req, res, next) => {
+  const statusCode = err.status;
+  if (Number(statusCode)  === 500){
+    try{
+      const authInfo = netatmoAuthService.getToken();
+      netatmoAuthKey = authInfo.access_token;
+      next();
+    }catch(error){
+      console.error(error);
+    }
+  }
+  else{
+    next(err);
+  }
+});
+
 
 
 // catch 404 and forward to error handler
