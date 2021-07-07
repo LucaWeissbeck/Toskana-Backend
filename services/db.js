@@ -4,6 +4,7 @@ const user = process.env.DB_USER;
 const password = process.env.DB_PASSWORD;
 const database = process.env.DB_NAME;
 
+
 const connection = mysql.createConnection({
   host: host,
   user: user,
