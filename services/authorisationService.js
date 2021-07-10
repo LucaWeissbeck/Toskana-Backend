@@ -8,13 +8,14 @@ const dbAuthorisation = require("../DbRequests/authorisation");
 const authorize = async(ip) => {
     const uuid = uuidv4();
     const timestamp = new Date();
-    await(dbAuthorisation.insertUser(uuid, ip, timestamp))
+    await(dbAuthorisation.insertUser(uuid, ip, timestamp));
 
-    return {
+    const data = {
         uuid: uuid,
         timestamp: timestamp,
         ip: ip
-    }
+    };
+    return data;
 }
 
 module.exports.authorize = authorize;
