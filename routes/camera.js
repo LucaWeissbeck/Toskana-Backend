@@ -4,9 +4,8 @@ const cameraService = require("../services/CameraService")
 
 /* Returns complete present Data for outdoor & indoor module */
 router.get('/homedata', async(req, res) => {
-    const authToken = req.headers['authorization'];
     try{
-        const homeData = await cameraService.getHomeData(authToken);
+        const homeData = await cameraService.getHomeData();
         res.status(200).send(homeData);
     }catch(error){
         console.log(error);

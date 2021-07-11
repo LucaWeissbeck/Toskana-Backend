@@ -26,7 +26,6 @@ mongoose.connect("mongodb+srv://Luca:LucaMongo@toskana.jb217.mongodb.net/myFirst
 });
 
 
-var authRouter = require('./routes/netatmoauthorisation');
 var weatherRouter = require('./routes/weather');
 var cameraRouter = require('./routes/camera');
 var phValueRouter = require('./routes/phValue');
@@ -91,7 +90,6 @@ passport.deserializeUser((_id, cb) => {
 
 // Routers ------------------------------------------------
 app.use("/authorize", userAuthRouter);
-app.use('/authorise', authRouter);
 app.use('/weather', weatherRouter);
 app.use('/camera', cameraRouter);
 app.use('/ph', phValueRouter);

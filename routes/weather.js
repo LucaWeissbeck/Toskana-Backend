@@ -4,9 +4,8 @@ const weatherService = require("../services/WeatherInfoService");
 
 /* GET users listing. */
 router.get('/weatherdata', async(req, res) => {
-    const authToken = req.headers['authorization'];
     try{
-      const weatherData = await weatherService.getWeatherInfoCurrent(authToken);
+      const weatherData = await weatherService.getWeatherInfoCurrent();
       res.status(200).send(weatherData);
     }catch(error){
       console.log(error);

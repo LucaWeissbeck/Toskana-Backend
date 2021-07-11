@@ -1,15 +1,27 @@
 const axios = require("axios");
 const qs = require("qs");
 const macInnen = process.env.INDOOR_MAC;
+const NetatmoAuthorizeService = require("../services/NetatmoAuthorizeService");
 
-
-const getWeatherInfoCurrent = async(authToken) => {
+const getWeatherInfoCurrent = async() => {
     const data = qs.stringify({
         "device_id" : macInnen,
         "get_favorites" : "false"
     })
-    const response = await axios.get('https://api.netatmo.com/api/getstationsdata', {headers: {"accept" : "application/json", "Authorization" : "Bearer " + authToken}, data});
-    return response.data;
+    try {
+        const response = await axios.get('https://api.netatmo.com/api/getstationsdata', {headers: {"accept" : "application/json", "Authorization" : "Bearer " + NetatmoAuthorizeService.tokenData.authToken}, data});
+        return response.data;
+    }catch(error){
+        if (error.response.status === 403){
+            await NetatmoAuthorizeService.refreshToken();
+            const response = await axios.get('https://api.netatmo.com/api/getstationsdata', {headers: {"accept" : "application/json", "Authorization" : "Bearer " + NetatmoAuthorizeService.tokenData.authToken}, data});
+            return response.data;
+        }
+        else{
+            console.error(error);
+        }
+    }
+
 };
 
 module.exports.getWeatherInfoCurrent = getWeatherInfoCurrent;
