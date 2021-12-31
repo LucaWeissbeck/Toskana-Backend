@@ -12,17 +12,22 @@ const mongoose = require("mongoose");
 const LocalStrategy = passportLocal.Strategy;
 const User = require("./models/User");
 const bcrypt = require("bcrypt");
+const keep = "mongodb+srv://Main:qP2xhrviJaLIkgSE@cluster0.smdy5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+const db_user = process.env.MONGO_USER
+const db_password = process.env.MONGO_PASSWORD
 
-
-
+console.log(db_password)
 //DB Connection ------------------------------------------------
-mongoose.connect("mongodb+srv://Luca:LucaMongo@toskana.jb217.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", {
-  useCreateIndex: true,
-  useNewUrlParser: true,
-  useUnifiedTopology: true
+mongoose.connect("mongodb+srv://" + String(db_user) + ":" + String(db_password) + "@cluster0.smdy5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", {
+    useCreateIndex: true,
+    useNewUrlParser: true,
+    useUnifiedTopology: true
 }, (err) => {
-  if (err) throw err;
-  console.log("Connected to MongoDB");
+    if (err) {
+        console.log(err)
+        throw err;
+    }
+    console.log("Connected to MongoDB");
 });
 
 
@@ -45,12 +50,12 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(cors({origin: "http://localhost:3000", credentials: true}));
+app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 app.use(
     session({
-      secret: "secretcode",
-      resave: true,
-      saveUninitialized: true,
+        secret: "secretcode",
+        resave: true,
+        saveUninitialized: true,
     })
 );
 app.use(cookieParser());
@@ -66,7 +71,7 @@ passport.use(new LocalStrategy((username, password, done) => {
             if (err) throw err;
             if (result === true) {
                 return done(null, user);
-            } else{
+            } else {
                 return done(null, false);
             }
         });
@@ -78,7 +83,7 @@ passport.serializeUser((user, cb) => {
 });
 
 passport.deserializeUser((_id, cb) => {
-    User.findOne({_id}, (err, user) => {
+    User.findOne({ _id }, (err, user) => {
         const userInformation = {
             username: user.username,
             isAdmin: user.isAdmin
@@ -98,8 +103,8 @@ const userauth = require("./services/authorisationService")
 
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
+app.use(function (req, res, next) {
+    next(createError(404));
 });
 
 
