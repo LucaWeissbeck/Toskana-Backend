@@ -12,11 +12,10 @@ const mongoose = require("mongoose");
 const LocalStrategy = passportLocal.Strategy;
 const User = require("./models/User");
 const bcrypt = require("bcrypt");
-const keep = "mongodb+srv://Main:qP2xhrviJaLIkgSE@cluster0.smdy5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 const db_user = process.env.MONGO_USER
 const db_password = process.env.MONGO_PASSWORD
 
-console.log(db_password)
+
 //DB Connection ------------------------------------------------
 mongoose.connect("mongodb+srv://" + String(db_user) + ":" + String(db_password) + "@cluster0.smdy5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", {
     useCreateIndex: true,
