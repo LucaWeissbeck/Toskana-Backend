@@ -35,6 +35,7 @@ var weatherRouter = require('./routes/weather');
 var cameraRouter = require('./routes/camera');
 var phValueRouter = require('./routes/phValue');
 const userAuthRouter = require("./routes/authorisation");
+const informationRouter = require("./routes/information");
 const { default: axios } = require("axios");
 
 var app = express();
@@ -98,6 +99,7 @@ app.use("/authorize", userAuthRouter);
 app.use('/weather', weatherRouter);
 app.use('/camera', cameraRouter);
 app.use('/ph', phValueRouter);
+app.use('/information', informationRouter);
 
 const userauth = require("./services/authorisationService")
 
