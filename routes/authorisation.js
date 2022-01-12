@@ -1,21 +1,20 @@
 var express = require('express');
 var router = express.Router();
 const bcrypt = require("bcrypt");
-const authorisationService = require("../services/authorisationService");
 const User = require("../models/User");
 const passport = require("passport");
 
-router.post("/register", async(req, res) => {
-    const {username, password} = req.body;
-    if(!username || !password || typeof username !== "string" || typeof password !== "string"){
+router.post("/register", async (req, res) => {
+    const { username, password } = req.body;
+    if (!username || !password || typeof username !== "string" || typeof password !== "string") {
         res.send("Improper Values");
         return;
     }
 
-    User.findOne({username}, async(err, doc) => {
+    User.findOne({ username }, async (err, doc) => {
         if (err) throw err;
         if (doc) res.send("User Already Exists");
-        if (!doc){
+        if (!doc) {
             const hashedPassword = await bcrypt.hash(password, 10);
             const newUser = new User({
                 username,

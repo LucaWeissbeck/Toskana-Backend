@@ -101,7 +101,6 @@ app.use('/camera', cameraRouter);
 app.use('/ph', phValueRouter);
 app.use('/information', informationRouter);
 
-const userauth = require("./services/authorisationService")
 
 
 // catch 404 and forward to error handler
