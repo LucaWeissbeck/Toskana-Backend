@@ -13,7 +13,7 @@ const getWeatherInfoCurrent = async() => {
         return response.data;
     }catch(error){
         if (error.response.status === 403){
-            await NetatmoAuthorizeService.refreshToken();
+            await NetatmoAuthorizeService.refreshTokenData();
             const response = await axios.get('https://api.netatmo.com/api/getstationsdata', {headers: {"accept" : "application/json", "Authorization" : "Bearer " + NetatmoAuthorizeService.tokenData.authToken}, data});
             return response.data;
         }

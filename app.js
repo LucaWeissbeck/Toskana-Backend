@@ -8,26 +8,12 @@ var cors = require('cors');
 const session = require("express-session");
 const passport = require("passport");
 const passportLocal = require("passport-local");
-const mongoose = require("mongoose");
 const LocalStrategy = passportLocal.Strategy;
 const User = require("./models/User");
 const bcrypt = require("bcrypt");
-const db_user = process.env.MONGO_USER
-const db_password = process.env.MONGO_PASSWORD
+const dbConnectionService = require("./services/dbConnectionService")
 
 
-//DB Connection ------------------------------------------------
-mongoose.connect("mongodb+srv://" + String(db_user) + ":" + String(db_password) + "@cluster0.smdy5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", {
-    useCreateIndex: true,
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-}, (err) => {
-    if (err) {
-        console.log(err)
-        throw err;
-    }
-    console.log("Connected to MongoDB");
-});
 
 
 var weatherRouter = require('./routes/weather');
