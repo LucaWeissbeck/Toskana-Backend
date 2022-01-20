@@ -17,7 +17,7 @@ const getPastWeek = () => {
     return new Promise((resolve, reject) => {
         db.query(sql, (err, rows) => {
             if(err){
-                return reject(new err);
+                return reject(err);
             }
             resolve(rows);
         })

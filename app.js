@@ -12,6 +12,7 @@ const LocalStrategy = passportLocal.Strategy;
 const User = require("./models/User");
 const bcrypt = require("bcrypt");
 const dbConnectionService = require("./services/dbConnectionService")
+const netatmoAuthorizeService = require("./services/netatmoAuthorizeService")
 
 
 
@@ -25,6 +26,9 @@ const { default: axios } = require("axios");
 
 var app = express();
 
+
+// Initialise Netatmo -----------------------------------------
+netatmoAuthorizeService.getTokenData()
 
 // Swagger ------------------------------------------------
 const swaggerUi = require('swagger-ui-express');

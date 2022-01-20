@@ -8,7 +8,7 @@ router.get('/weatherdata', async(req, res) => {
       const weatherData = await weatherService.getWeatherInfoCurrent();
       res.status(200).send(weatherData);
     }catch(error){
-      console.log(error);
+      console.log(error.response);
       res.status(400).send("Request failed");
   };
   }

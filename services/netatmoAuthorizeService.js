@@ -18,15 +18,17 @@ const getTokenData = async() => {
             "client_id": CLIENT_ID,
             "client_secret": CLIENT_SECRET,
             "username": USERNAME,
-            "password": PASSWORD
+            "password": PASSWORD,
+            "scope": "read_station read_thermostat write_thermostat read_camera write_camera access_camera read_presence access_presence read_homecoach read_smokedetector"
         }
 
         const response = await axios({ method: "post", url: "https://api.netatmo.com/oauth2/token", data: qs.stringify(body), headers: {"Content-Type": "application/x-www-form-urlencoded"}})
         tokenData.authToken = response.data.access_token
         tokenData.refreshToken = response.data.refresh_token
-        console.log(tokenData)
+        console.log(tokenData.authToken)
+
     } catch(err) {
-        console.log(err.response.data)
+        console.error(err.response.data)
     }
 }
 
@@ -47,4 +49,4 @@ const refreshTokenData = async() => {
     }
 }
 
-module.exports = {getTokenData, refreshTokenData}
+module.exports = {getTokenData, refreshTokenData, tokenData}
