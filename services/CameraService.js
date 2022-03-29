@@ -1,6 +1,10 @@
+const {convertFromBase64} = require("./utilityService")
+let HOME_ID = convertFromBase64(process.env.HOME_ID);
+
 const axios = require("axios");
-const HOME_ID = process.env.HOME_ID
 const NetatmoAuthorizeService = require("../services/netatmoAuthorizeService");
+
+
 
 const getHomeData = async() => {
     try{

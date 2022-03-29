@@ -1,10 +1,11 @@
+const { convertFromBase64 } = require("./utilityService")
 const mysql = require('mysql');
 const host = process.env.DB_HOST;
 const user = process.env.DB_USER;
-const password = process.env.DB_PASSWORD;
+const password = convertFromBase64(process.env.DB_PASSWORD);
 const database = process.env.DB_NAME;
-const db_user = process.env.MONGO_USER
-const db_password = process.env.MONGO_PASSWORD
+const db_user = process.env.MONGO_USER;
+const db_password = convertFromBase64(process.env.MONGO_PASSWORD);
 const mongoose = require("mongoose")
 
 // MySQL Connection

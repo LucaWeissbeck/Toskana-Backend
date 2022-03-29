@@ -1,6 +1,8 @@
 const axios = require("axios");
 const qs = require("qs");
-const macInnen = process.env.INDOOR_MAC;
+const { convertFromBase64 } = require("./utilityService")
+
+const macInnen = convertFromBase64(process.env.INDOOR_MAC);
 const NetatmoAuthorizeService = require("../services/netatmoAuthorizeService");
 
 const getWeatherInfoCurrent = async() => {
