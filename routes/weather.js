@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const weatherService = require("../services/WeatherInfoService");
+const weatherService = require("../services/weatherInfoService");
 
 /* GET users listing. */
 router.get('/weatherdata', async(req, res) => {
