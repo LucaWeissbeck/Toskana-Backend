@@ -13,13 +13,13 @@ router.get("/services", async (req, res) => {
             CLIENT_SECRET: process.env.CLIENT_SECRET ? true : false,
 
             // + Security
-            SECURITY_NETATMO: process.env.SECURITY_NETATMO ? true : false,
+            SECURITY_NETATMO: process.env.SECURITY_NETATMO  === "Use",
 
             // + Weather
             INDOOR_MAC: process.env.INDOOR_MAC ? true : false,
 
             // Pool Data
-            POOL_DATA: process.env.POOL_DATA ? true : false
+            POOL_DATA: process.env.POOL_DATA === "Use"
         }
         res.status(200).send(envKeysPresent)
     } catch (err) {
