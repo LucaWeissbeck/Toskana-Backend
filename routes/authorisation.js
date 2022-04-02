@@ -4,6 +4,10 @@ const bcrypt = require("bcrypt");
 const User = require("../models/User");
 const passport = require("passport");
 
+router.get("/test", (req, res) => {
+    res.send("Good")
+})
+
 router.post("/register", async (req, res) => {
     const { username, password } = req.body;
     if (!username || !password || typeof username !== "string" || typeof password !== "string") {

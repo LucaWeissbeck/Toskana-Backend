@@ -11,5 +11,6 @@ RUN npm install
 # Copy everything from current directory into the /app in container
 COPY . .
 
+EXPOSE 8080
 # Start App
 CMD ["node", "./bin/www"]
