@@ -29,16 +29,20 @@ my_sql_connection.connect((err) => {
 }); 
 
 // MongoDB Connection
-mongoose.connect("mongodb+srv://" + String(db_user) + ":" + String(db_password) + "@cluster0.jb217.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", {
+mongoose.connect("mongodb+srv://" + String(db_user) + ":" + String(db_password) + "@toskana.jb217.mongodb.net/?retryWrites=true&w=majority", {
   useCreateIndex: true,
   useNewUrlParser: true,
   useUnifiedTopology: true
+   
 }, (err) => {
   if (err) {
     console.log(err)
     throw err;
   }
-  console.log("Connected to MongoDB");
+  else{
+    console.log("Connected to MongoDB");
+  }
+  
 });
 
 module.exports = my_sql_connection;
