@@ -13,7 +13,6 @@ const getPastWeek = async() => {
     result = await PHModel.find({
         "date": { $gte: lastWeek }
     })
-    console.log(result)
     return result
 }
 
