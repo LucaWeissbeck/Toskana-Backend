@@ -1,8 +1,7 @@
 const axios = require("axios");
 const qs = require("qs");
-const { convertFromBase64 } = require("./utilityService")
-
-const macInnen = convertFromBase64(process.env.INDOOR_MAC);
+const readDockerSecret = require("../util/dockerSecretsReader")
+const macInnen = process.env.INDOOR_MAC || readDockerSecret("INDOOR_MAC");
 const NetatmoAuthorizeService = require("../services/netatmoAuthorizeService");
 
 const getWeatherInfoCurrent = async() => {

@@ -1,11 +1,10 @@
-const { convertFromBase64 } = require("./utilityService")
-
 const axios = require("axios");
 const FormData = require("form-data")
-const CLIENT_ID = process.env.CLIENT_ID
-const CLIENT_SECRET = convertFromBase64(process.env.CLIENT_SECRET)
-const USERNAME = convertFromBase64(process.env.ACCOUNT_EMAIL)
-const PASSWORD = convertFromBase64(process.env.ACCOUNT_PASSWORD)
+const readDockerSecret = require("../util/dockerSecretsReader")
+const CLIENT_ID = process.env.CLIENT_ID || readDockerSecret("CLIENT_ID")
+const CLIENT_SECRET = process.env.CLIENT_SECRET || readDockerSecret("CLIENT_SECRET")
+const USERNAME = process.env.ACCOUNT_EMAIL || readDockerSecret("ACCOUNT_EMAIL")
+const PASSWORD = process.env.ACCOUNT_PASSWORD || readDockerSecret("ACCOUNT_PASSWORD")
 const qs = require("qs")
 
 tokenData = {

@@ -1,6 +1,5 @@
-const {convertFromBase64} = require("./utilityService")
-let HOME_ID = convertFromBase64(process.env.HOME_ID);
-
+const readDockerSecret = require("../util/dockerSecretsReader")
+let HOME_ID = process.env.HOME_ID || readDockerSecret("HOME_ID");
 const axios = require("axios");
 const NetatmoAuthorizeService = require("../services/netatmoAuthorizeService");
 

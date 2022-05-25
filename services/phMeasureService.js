@@ -1,27 +1,20 @@
 const db = require("./dbConnectionService");
+const PHModel = require("../models/PHModel");
 
-const getAllValues = () => {
-    return new Promise((resolve, reject) => {
-        db.query("SELECT * FROM PH", (err, rows) => {
-            if(err){
-                return reject(new err);
-            }
-            resolve(rows);
-        })
-
-    })
+const getAllValues = async() => {
+    result = await PHModel.find({})
+    return result
 }
 
-const getPastWeek = () => {
-    const sql = "SELECT * FROM `PH`WHERE Time >= DATE(NOW()) - INTERVAL 7 DAY"
-    return new Promise((resolve, reject) => {
-        db.query(sql, (err, rows) => {
-            if(err){
-                return reject(err);
-            }
-            resolve(rows);
-        })
+const getPastWeek = async() => {
+    var lastWeek = new Date();
+    lastWeek.setDate(lastWeek.getDate() - 7);
+    // Compute the time 7 days ago to use in filtering the data
+    result = await PHModel.find({
+        "date": { $gte: lastWeek }
     })
+    console.log(result)
+    return result
 }
 
 module.exports.getAllValues = getAllValues;
