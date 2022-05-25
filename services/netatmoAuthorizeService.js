@@ -29,7 +29,7 @@ const getTokenData = async() => {
         console.log(tokenData.authToken)
 
     } catch(err) {
-        console.error(err.response.data)
+        console.error(err)
     }
 }
 
@@ -46,7 +46,7 @@ const refreshTokenData = async() => {
         tokenData.authToken = response.data.access_token
         tokenData.refreshToken = response.data.refresh_token
     } catch (err) {
-        console.error(err.response.data)
+        console.error(err)
     }
 }
 

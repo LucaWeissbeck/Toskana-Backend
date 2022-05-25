@@ -5,21 +5,25 @@ const mongoose = require("mongoose")
 
 
 // MongoDB Connection
-mongoose.connect("mongodb+srv://" + String(db_user) + ":" + String(db_password) + "@toskana.jb217.mongodb.net/?retryWrites=true&w=majority", {
-  useCreateIndex: true,
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  dbName: "PHValues"
-   
-}, (err) => {
-  if (err) {
-    console.log(err)
-    throw err;
-  }
-  else{
-    console.log("Connected to MongoDB");
-  }
-  
-});
-
+try{
+  mongoose.connect("mongodb+srv://" + String(db_user) + ":" + String(db_password) + "@toskana.jb217.mongodb.net/?retryWrites=true&w=majority", {
+    useCreateIndex: true,
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    UseNewUrlParser: true, 
+    dbName: "PHValues"
+    
+  }, (err) => {
+    if (err) {
+      console.log(err)
+      throw err;
+    }
+    else{
+      console.log("Connected to MongoDB");
+    }
+    
+  });
+}catch(err){
+  console.log("Couldnt connect to DB", err)
+}
 

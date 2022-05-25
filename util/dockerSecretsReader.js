@@ -3,7 +3,8 @@ const fs = require('fs');
 
 const readDockerSecret = secretName => {
     try {
-        return fs.readFileSync(`/run/secrets/${secretName}`, 'utf8');
+        output = fs.readFileSync(`/run/secrets/${secretName}`, 'utf8')
+        return output
     } catch (err) {
         if (err.code !== 'ENOENT') {
             console.error(`An error occurred while trying to read the secret: ${secretName}. Err: ${err}`);
